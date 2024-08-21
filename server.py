@@ -6,11 +6,6 @@ from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.PublicKey import RSA
 from Crypto.Signature import pkcs1_15
 from Crypto.Util.Padding import pad, unpad
-# SECURITY FLAWS: 
-# 1) Chat uses AES.MODE_ECB with no iv, meaning that all identical messages, will have the same encrypted version. SOLVED: an iv can be transmitted in plain along with a ciphertext as long as it comes out random.
-# 2) There is not a way to tell how big the encryted message is gonna be for a receipent - SOLVED: I can simply send the length of the encrypted message in plain, since, if an evesdropper is listenning, he will know the length of the ENCRYPTED MESSAGE anyway.
-
-# For some reason, if name length is less than 9 (jakesssss), it gets padded in a weird (if 'jake', then it spaces up vastly to the right) - SOLVED: simply need to remove the padding calling the 'unpad' method from Crypto.Util.Padding.
 
 class Server:
 
